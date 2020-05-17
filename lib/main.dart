@@ -34,6 +34,7 @@ class _QuizPageState extends State<QuizPage> {
   ];
 
   int questionNumber = 0;
+  List<bool> answers = [false, true, true];
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +72,12 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == true) {
+                  print('True');
+                } else {
+                  print('False');
+                }
                 setState(() {
                   questionNumber++;
                   scoreKeeper.add(
@@ -97,6 +104,12 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == false) {
+                  print('True');
+                } else {
+                  print('False');
+                }
                 setState(() {
                   questionNumber++;
                   scoreKeeper.add(
@@ -110,9 +123,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Row(
-          children: scoreKeeper
-        ),
+        Row(children: scoreKeeper),
       ],
     );
   }
