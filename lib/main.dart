@@ -39,7 +39,7 @@ class _QuizPageState extends State<QuizPage> {
 
 QuizBrain quizBrain = QuizBrain();
 
-  int questionNumber = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ QuizBrain quizBrain = QuizBrain();
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -77,14 +77,14 @@ QuizBrain quizBrain = QuizBrain();
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 if (correctAnswer == true) {
                   print('True');
                 } else {
                   print('False');
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                       Icons.check,
@@ -109,14 +109,14 @@ QuizBrain quizBrain = QuizBrain();
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 if (correctAnswer == false) {
                   print('True');
                 } else {
                   print('False');
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                       Icons.close,
