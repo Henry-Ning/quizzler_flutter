@@ -28,18 +28,27 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-//  List<String> questions = [
-//    'You can lead a cow down stairs but not up stairs.',
-//    'Approximately one quarter of human bones are in the feet.',
-//    'A slug\'s blood is green.'
-//  ];
-//
-//
-//  List<bool> answers = [false, true, true];
 
-QuizBrain quizBrain = QuizBrain();
+  QuizBrain quizBrain = QuizBrain();
 
-
+  void checkAnswers(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getQuestionAnswer();
+    if (correctAnswer == userPickedAnswer) {
+      scoreKeeper.add(
+        Icon(
+          Icons.check,
+          color: Colors.green,
+        ),
+      );
+    } else {
+      scoreKeeper.add(
+        Icon(
+          Icons.close,
+          color: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,20 +86,10 @@ QuizBrain quizBrain = QuizBrain();
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == true) {
-                  print('True');
-                } else {
-                  print('False');
-                }
+                bool userPickedAnswer = true;
+                checkAnswers(userPickedAnswer);
                 setState(() {
                   quizBrain.nextQuestion();
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
                 });
               },
             ),
@@ -109,20 +108,10 @@ QuizBrain quizBrain = QuizBrain();
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getQuestionAnswer();
-                if (correctAnswer == false) {
-                  print('True');
-                } else {
-                  print('False');
-                }
+                bool userPickedAnswer = false;
+                checkAnswers(userPickedAnswer);
                 setState(() {
                   quizBrain.nextQuestion();
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
                 });
               },
             ),
